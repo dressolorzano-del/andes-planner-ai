@@ -1,0 +1,112 @@
+import type { Agency, ItineraryDay, ChecklistItem, WeatherData } from '@/types';
+
+export const MOCK_AGENCIES: Agency[] = [
+  {
+    id: 'summit-ecuador',
+    name: 'Summit Ecuador Expeditions',
+    location: 'Quito',
+    founded: 2008,
+    rating: 4.9,
+    reviewCount: 312,
+    pricePerPerson: 2280,
+    currency: 'USD',
+    certifications: ['ASEGUIM', 'UIAGM', 'Ministerio de Turismo Ecuador'],
+    servicesIncluded: ['Guía certificado', 'Crampones y piolet', 'Seguro de rescate', 'Desayuno en refugio', 'Transporte al refugio'],
+    languages: ['Español', 'Inglés', 'Francés'],
+    safetyScore: 9.8,
+    pros: ['Guías hablan español e inglés', 'Ratio 1:2 guía-cliente', 'Aclimatación en Illiniza incluida', 'Equipo técnico completo provisto'],
+    cons: ['Fechas limitadas en agosto', 'Sin transporte aeropuerto-ciudad', 'Requiere reserva con 8 semanas de anticipación'],
+    website: 'https://summitecuador.com',
+    phone: '+593 2 254-0123',
+    source: 'database',
+  },
+  {
+    id: 'andes-climbing',
+    name: 'Andes Climbing Guides',
+    location: 'Latacunga',
+    founded: 2015,
+    rating: 4.7,
+    reviewCount: 189,
+    pricePerPerson: 1950,
+    currency: 'USD',
+    certifications: ['ASEGUIM', 'Cruz Roja Ecuador'],
+    servicesIncluded: ['Guía certificado', 'Crampones (renta incluida)', 'Transporte Latacunga-Cotopaxi'],
+    languages: ['Español', 'Inglés básico'],
+    safetyScore: 9.1,
+    pros: ['Precio más competitivo del mercado', 'Acceso directo desde Latacunga', 'Flexibilidad en fechas', 'Excelente conocimiento local'],
+    cons: ['Seguro de rescate no incluido (+$180/persona)', 'Piolet a rentar por separado (+$15/día)', 'Comunicación en inglés limitada'],
+    website: 'https://andesclimbing.ec',
+    source: 'database',
+  },
+  {
+    id: 'ecuador-high-peaks',
+    name: 'Ecuador High Peaks',
+    location: 'Quito',
+    founded: 2001,
+    rating: 4.8,
+    reviewCount: 521,
+    pricePerPerson: 3100,
+    currency: 'USD',
+    certifications: ['ASEGUIM', 'UIAGM', 'ISO 9001', 'National Geographic Partner'],
+    servicesIncluded: ['Guía UIAGM', 'Equipo completo de alta montaña', 'Seguro de rescate y evacuación', 'Transporte completo', 'Hospedaje en Quito (2 noches)', 'Comidas en campo'],
+    languages: ['Español', 'Inglés', 'Alemán', 'Portugués'],
+    safetyScore: 9.9,
+    pros: ['Experiencia de 23 años', 'Servicio premium todo incluido', 'Guías con certificación UIAGM internacional', 'Historial de 0 accidentes graves'],
+    cons: ['Precio premium ($3,100)', 'Grupos más grandes (hasta 8 personas)', 'Menos flexibilidad en itinerario'],
+    website: 'https://ecuadorhighpeaks.com',
+    source: 'database',
+  },
+];
+
+export const MOCK_ITINERARY: ItineraryDay[] = [
+  { day: '1–2', location: 'Quito', altitude: 2850, activities: ['Llegada al aeropuerto', 'Check-in hotel', 'Hidratación activa', 'Paseo liviano casco histórico'], accommodation: 'Hotel en Quito', notes: 'Sin esfuerzo físico. Hidratación: mínimo 3L/día. Evitar alcohol las primeras 48h.', isRestDay: true, isSummitDay: false },
+  { day: 3, location: 'Reserva Ecológica Pasochoa', altitude: 4200, activities: ['Caminata de aclimatación 5–6h', 'Ascenso a 4,200m', 'Técnica de respiración paced'], accommodation: 'Hotel en Quito', notes: 'Primera exposición a altitud moderada. Si hay cefalea leve, es normal. Descienden a dormir en Quito.', isRestDay: false, isSummitDay: false },
+  { day: '4–5', location: 'Illiniza Norte (5,126m)', altitude: 5126, activities: ['Trekking con mochila cargada', 'Cruce de moraine glaciar', 'Noche en refugio Nuevos Horizontes (4,800m)', 'Cumbre Illiniza Norte'], accommodation: 'Refugio Nuevos Horizontes (4,800m)', notes: 'Ascenso no glaciado. Valida respuesta fisiológica >5,000m. Punto de decisión: continuar si SpO₂ >85%.', isRestDay: false, isSummitDay: false, alerts: ['Monitorear SpO₂ en refugio. Objetivo >85%'] },
+  { day: '6–7', location: 'Valle Quilotoa (3,914m)', altitude: 3914, activities: ['Trekking laguna Quilotoa', 'Observación de cóndores', 'Visita comunidades indígenas Tigua', 'Descanso completo día 7'], accommodation: 'Hostal en Latacunga', notes: 'Recuperación y consolidación de aclimatación. Altitud moderada — el cuerpo integra las adaptaciones.', isRestDay: true, isSummitDay: false },
+  { day: 8, location: 'Parque Nacional Cotopaxi', altitude: 4800, activities: ['Traslado a área del Cotopaxi', 'Caminata hasta refugio José Ribas (4,800m)', 'Briefing técnico con guía', 'Preparación de equipos', 'Cena temprana 17:00 / Dormir 18:00'], accommodation: 'Refugio José Ribas (4,800m)', notes: 'Día de preparación y descanso pre-cumbre. Revisar equipo: crampones, arnés, piolet, capas de ropa.', isRestDay: true, isSummitDay: false },
+  { day: 9, location: 'Cotopaxi (5,897m)', altitude: 5897, activities: ['Salida a medianoche (00:00)', 'Ascenso glaciar con crampones (~8h)', 'Cumbre aproximada 08:00–10:00', 'Descenso al refugio', 'Retorno a Latacunga'], accommodation: 'Hostal en Latacunga', notes: 'Salida a medianoche para aprovechar hielo firme. Temperatura esperada: -10°C a -15°C en cumbre. Buffer de agua: 2L.', isRestDay: false, isSummitDay: true, alerts: ['Alta exposición a UV en glaciar', 'Riesgo de mal de altura agudo >5,500m', 'Punto de retorno obligatorio si síntomas de HACE/HAPO'] },
+  { day: '10–11', location: 'Riobamba (2,754m)', altitude: 2754, activities: ['Descanso físico completo', 'Visita mercado Saquisilí (día 10)', 'Evaluación física y médica', 'Hidratación y nutrición'], accommodation: 'Hotel en Riobamba', notes: 'Recuperación obligatoria entre volcanes. No se debe ascender Chimborazo dentro de los 2 días post-Cotopaxi.', isRestDay: true, isSummitDay: false },
+  { day: 12, location: 'Refugio Carrel (4,800m) / Whymper (5,000m)', altitude: 5000, activities: ['Traslado a zona Chimborazo', 'Caminata de aclimatación hasta refugio Whymper (5,000m)', 'Reconocimiento de ruta', 'Preparación equipos'], accommodation: 'Refugio Whymper (5,000m)', notes: 'El Chimborazo tiene dos refugios: Carrel (4,800m) y Whymper (5,000m). Se duerme en Whymper para mejor aclimatación.', isRestDay: false, isSummitDay: false },
+  { day: 13, location: 'Chimborazo (6,268m)', altitude: 6268, activities: ['Salida 23:00 del refugio', 'Ascenso técnico ~10h', 'Cumbre ~09:00 (el punto más lejano del centro de la Tierra)', 'Descenso y retorno a Quito'], accommodation: 'Hotel en Quito', notes: 'La cumbre del Chimborazo, por su cercanía al ecuador geográfico, es el punto más alejado del centro de la Tierra. Logro extraordinario.', isRestDay: false, isSummitDay: true, alerts: ['Altitud extrema: requiere excelente estado físico y SpO₂ >88% en refugio', 'No intentar si hay síntomas residuales del Cotopaxi'] },
+  { day: 14, location: 'Quito → Vuelo de regreso', altitude: 2850, activities: ['Buffer de recuperación en Quito', 'Check-out y traslado aeropuerto', 'Vuelo de regreso'], accommodation: 'Aeropuerto / En tránsito', notes: 'Se recomienda mínimo 12h en Quito (2,850m) antes del vuelo post-Chimborazo para reducir riesgo de embolias.', isRestDay: true, isSummitDay: false },
+];
+
+export const MOCK_CHECKLIST: ChecklistItem[] = [
+  // Equipo técnico
+  { id: 'c1', category: 'Equipo técnico', item: 'Crampones de 12 puntas (tipo C2/C3)', priority: 'essential', coveredByAgency: true, checked: false },
+  { id: 'c2', category: 'Equipo técnico', item: 'Piolet de alpinismo (60–70cm)', priority: 'essential', coveredByAgency: true, checked: false },
+  { id: 'c3', category: 'Equipo técnico', item: 'Casco de escalada', priority: 'essential', coveredByAgency: true, checked: false },
+  { id: 'c4', category: 'Equipo técnico', item: 'Arnés de alta montaña', priority: 'essential', coveredByAgency: true, checked: false },
+  { id: 'c5', category: 'Equipo técnico', item: 'Gafas de glaciar UV400 (categoría 4)', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c6', category: 'Equipo técnico', item: 'Botas doble (compatibles con crampones C2)', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c7', category: 'Equipo técnico', item: 'Polainas altas impermeables', priority: 'recommended', coveredByAgency: false, checked: false },
+  // Ropa
+  { id: 'c8', category: 'Ropa y capas', item: 'Capa base térmica (lana merino o sintético)', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c9', category: 'Ropa y capas', item: 'Capa intermedia: fleece o down jacket', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c10', category: 'Ropa y capas', item: 'Capa exterior: Gore-Tex o similar (chaqueta + pantalón)', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c11', category: 'Ropa y capas', item: 'Guantes de forro (liner) + guantes exteriores impermeables', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c12', category: 'Ropa y capas', item: 'Buff / pasamontañas', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c13', category: 'Ropa y capas', item: 'Gorro de lana', priority: 'essential', coveredByAgency: false, checked: false },
+  // Salud
+  { id: 'c14', category: 'Salud y medicación', item: 'Acetazolamida (Diamox) — consultar médico para dosis', priority: 'recommended', coveredByAgency: false, checked: false },
+  { id: 'c15', category: 'Salud y medicación', item: 'Ibuprofeno 400mg (anti-inflamatorio para altitud)', priority: 'recommended', coveredByAgency: false, checked: false },
+  { id: 'c16', category: 'Salud y medicación', item: 'Dexametasona (emergencia HACE/HAPO) — con receta', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c17', category: 'Salud y medicación', item: 'Oxímetro de pulso personal', priority: 'recommended', coveredByAgency: false, checked: false },
+  { id: 'c18', category: 'Salud y medicación', item: 'Crema solar SPF 50+ y protector labial', priority: 'essential', coveredByAgency: false, checked: false },
+  // Documentos
+  { id: 'c19', category: 'Documentos y trámites', item: 'Pasaporte vigente (mín. 6 meses desde regreso)', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c20', category: 'Documentos y trámites', item: 'Seguro de viaje con cobertura de evacuación aérea en altitud', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c21', category: 'Documentos y trámites', item: 'Reserva confirmada de agencia (con depósito pagado)', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c22', category: 'Documentos y trámites', item: 'Permiso de ingreso Parque Nacional Cotopaxi ($10 USD)', priority: 'essential', coveredByAgency: true, checked: false },
+  // Preparación física
+  { id: 'c23', category: 'Preparación física (6 semanas antes)', item: '3 sesiones/semana de cardio de alta intensidad ≥45 min (zone 3–4)', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c24', category: 'Preparación física (6 semanas antes)', item: 'Caminata con mochila 10–15kg en terreno con desnivel', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c25', category: 'Preparación física (6 semanas antes)', item: 'Consulta médica de aptitud cardiovascular y pulmonar', priority: 'essential', coveredByAgency: false, checked: false },
+  { id: 'c26', category: 'Preparación física (6 semanas antes)', item: 'Medir SpO₂ basal (objetivo >96% al nivel del mar)', priority: 'recommended', coveredByAgency: false, checked: false },
+];
+
+export const MOCK_WEATHER: WeatherData[] = [
+  { location: 'Quito', altitude: 2850, date: 'Agosto', tempMax: 18, tempMin: 8, precipitation: 45, windSpeed: 15, snowfall: 0, weatherCode: 1, description: 'Parcialmente nublado, temporada seca' },
+  { location: 'Cotopaxi Cumbre', altitude: 5897, date: 'Agosto', tempMax: -5, tempMin: -18, precipitation: 12, windSpeed: 45, snowfall: 5, weatherCode: 3, description: 'Vientos fuertes ocasionales, niebla matutina' },
+  { location: 'Chimborazo Cumbre', altitude: 6268, date: 'Agosto', tempMax: -8, tempMin: -22, precipitation: 8, windSpeed: 55, snowfall: 8, weatherCode: 3, description: 'Condiciones árticas, viento racheado' },
+];

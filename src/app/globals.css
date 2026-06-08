@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --summit: #3B6D11;
+  --summit-light: #f0f7e6;
+  --summit-mid: #639922;
+  --glacier: #0F6E56;
+  --glacier-light: #e1f5ee;
+  --altitude: #BA7517;
+  --altitude-light: #faeeda;
+  --rock: #2C2C2A;
+  --pebble: #888780;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--rock);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.shimmer-bg {
+  background: linear-gradient(90deg, #f0f7e6 25%, #d9ecbf 50%, #f0f7e6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.mountain-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='40' viewBox='0 0 100 40'%3E%3Cpath d='M0 40 L15 15 L30 30 L50 5 L70 25 L85 12 L100 40Z' fill='%233B6D11' fill-opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: bottom;
+}
+
+.prose-alpine p { margin-bottom: 0.75rem; line-height: 1.7; }
+.prose-alpine strong { color: var(--summit); }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1efe8; }
+::-webkit-scrollbar-thumb { background: #b4b2a9; border-radius: 3px; }
+
+/* Tab underline */
+.tab-active { border-bottom: 2px solid var(--summit); color: var(--summit); font-weight: 500; }
+
+/* Checklist animation */
+.check-done { text-decoration: line-through; color: var(--pebble); }
